@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
+  actionName : string = 'signin'
 
+  changeAction(action:string){
+    this.actionName = action
+  }
 }

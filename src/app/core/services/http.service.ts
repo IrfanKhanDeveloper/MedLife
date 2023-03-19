@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
@@ -16,5 +16,9 @@ httpHeaders : HttpHeaders = new HttpHeaders().set("Content-type","application/js
     const url = this.baseUrl+endPoint
     return this.http.get(url,{headers:this.httpHeaders})
   }
-
+  
+  getDataFromServerByQueryPrameter(endPoint:string,httpParams:HttpParams){
+    const url = this.baseUrl+endPoint
+    return this.http.get(url,{headers:this.httpHeaders,params:httpParams})
+  }
 }

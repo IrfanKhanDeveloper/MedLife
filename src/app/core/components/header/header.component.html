@@ -7,8 +7,27 @@
           </a>
           <div class="text-end ">
             <a class="me-3 text-decoration-none">About Us</a>
-            <a class="ms-2 text-decoration-none">Login</a>
+            <a class="ms-2 text-decoration-none cursor" data-bs-toggle="modal" data-bs-target="#loginModel">Login</a>
           </div>
         </div>
       </nav>
+</div>
+
+<div class="modal fade" id="loginModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">{{actionName==='signup'?'signup':'signin'}}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <app-signin *ngIf="actionName==='signin'"></app-signin>
+          <app-signup *ngIf="actionName==='signup'"></app-signup>
+      </div>
+      <div class="d-grid gap-2 m-3">
+        <button class="btn btn-primary" type="button" *ngIf="actionName==='signup'" (click)="changeAction('signin')">Sign In</button>
+        <button class="btn btn-primary" type="button" *ngIf="actionName==='signin'" (click)="changeAction('signup')">Sign Up</button>
+      </div>
+    </div>
+  </div>
 </div>

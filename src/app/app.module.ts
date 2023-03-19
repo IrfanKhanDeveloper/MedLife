@@ -15,6 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TopDealsByCategoryComponent } from './components/top-deals-by-category/top-deals-by-category.component';
 import { ViewProductDetailsComponent } from './components/view-product-details/view-product-details.component';
 import { TopDealsHeaderComponent } from './components/top-deals-header/top-deals-header.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,6 +25,7 @@ import { TopDealsHeaderComponent } from './components/top-deals-header/top-deals
     TopDealsByCategoryComponent,
     ViewProductDetailsComponent,
     TopDealsHeaderComponent,
+
   ],
   
   imports: [
@@ -35,7 +37,6 @@ import { TopDealsHeaderComponent } from './components/top-deals-header/top-deals
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule
-
   ],
   providers: [],
   bootstrap: [AppComponent]
