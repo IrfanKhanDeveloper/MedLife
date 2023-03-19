@@ -1,0 +1,15 @@
+.search-heading{
+    min-width: 12%;
+    padding: 12px;
+}
+
+.input-group{
+    width: 93%;
+    box-shadow: 0 4px 10px 0 rgb(0 0 0 / 16%);
+    position: relative;
+    bottom: 30px;
+
+    .input-group-text{
+        font-size: 1rem;
+    }
+}

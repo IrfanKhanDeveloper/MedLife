@@ -1,0 +1,63 @@
+<div class="container-fluid p-5 bg-primary">
+    <div class="row text text-center text-white">
+        <h3>Get Huge Savings on Medicines</h3>
+    </div>
+    <div class="d-flex flex-row mb-3 justify-content-center text-white">
+        <div class="p-2"><span><i class="bi bi-check-circle me-1"></i></span>100 % Genuine Medicines</div>
+        <div class="p-2"> <span><i class="bi bi-check-circle me-1"></i></span>Trusted Pharmacies</div>
+        <div class="p-2"> <span><i class="bi bi-check-circle me-1"></i></span>Delivery to your doorstep</div>
+        <div class="p-2"> <span><i class="bi bi-check-circle me-1"></i></span>Store Pick up</div>
+      </div>
+</div>
+<div class="container w-75">
+    <div class="input-group input-group-lg rounded-3">
+        <span class=" input-group-text search-heading bg-body fs-6" id="inputGroup-sizing-lg ">{{showDefaultPincode ?   "beed 431122":pincodeDetails?.pincodeCity+ ' '+pincodeDetails?.pincode  }} <i class="bi bi-chevron-down ms-2"  data-bs-toggle="modal" data-bs-target="#exampleModal"></i></span>
+        <input type="text" placeholder="Search Mediciens" class="form-control fs-6" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+        <span class="input-group-text  search-heading bg-body text-primary fw-semibold" id="inputGroup-sizing-lg"><i class="bi bi-search me-2 fw-bold"></i>Search</span>
+      </div>
+</div>
+
+
+<div class="container w-75">
+    <div class="row mt-3">
+        <img src="https://www.medibuddy.in/assets/banners/medicine-page.webp" alt="">
+    </div>
+</div>
+
+<div class="container mt-5">
+    <owl-carousel-o [options]="customOptions">
+        <ng-template carouselSlide><img src="https://www.medibuddy.in/assets/banners/otcStore.webp" alt=""></ng-template>  
+        <ng-template carouselSlide><img src="https://www.medibuddy.in/assets/offers/CallOffer.png" alt=""></ng-template>  
+        <ng-template carouselSlide><img src="https://www.medibuddy.in/assets/offers/discount-home-delivered.png" alt=""></ng-template>  
+    </owl-carousel-o>
+</div>
+
+<div class="container mt-4">
+  <div class="clearfix ">
+    <h3 class="float-start">Top Deals</h3>
+    <a class="fs-5 text-decoration-none float-end cursor" 
+   routerLink="/top-deals-by-category" >View All</a>
+  </div>
+    <app-top-deals></app-top-deals>
+</div>
+
+
+   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" #closeBtn></button>
+        </div>
+        <div class="modal-body">
+            <label for="validationCustom01" class="form-label fs-5 fw-semibold" >Set your location</label>
+            <input type="text" class="form-control" id="validationCustom01" maxlength="6" [(ngModel)]="pincode" value="" required>
+            <div class="invalid-feedback d-block" *ngIf="displayErrorMsg">
+              Sorry , Our service is not available at your location
+            </div>
+        </div>
+        <div class="d-grid gap-2 m-4">
+            <button class="btn btn-primary" type="button" (click)="verifyPincode()">Submit</button>
+          </div>
+      </div>
+    </div>
+  </div>
