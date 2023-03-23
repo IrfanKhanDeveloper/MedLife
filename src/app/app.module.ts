@@ -21,7 +21,7 @@ import { TopDealsHeaderComponent } from './components/top-deals-header/top-deals
     AppComponent,
     HomeComponent,
     MedicineComponent,
-    TopDealsComponent,
+   TopDealsComponent,
     TopDealsByCategoryComponent,
     ViewProductDetailsComponent,
     TopDealsHeaderComponent,

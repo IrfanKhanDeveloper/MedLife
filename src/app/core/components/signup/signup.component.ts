@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { interval, Subscription } from 'rxjs';
+import { HttpService } from '../../services/http.service';
 
 @Component({
   selector: 'app-signup',
@@ -8,42 +9,63 @@ import { interval, Subscription } from 'rxjs';
   styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent implements OnInit,OnDestroy {
-    signUpForm!:FormGroup
-    isGetOTP:boolean = false  
-    otpCounter :number =0
-    sub!:Subscription
-  constructor(private fb:FormBuilder){}
-  
+  signForm!:FormGroup;
+  isGetOtp:boolean = false ;
+  otpCounter:number = 0 ;
+  otpGenerated!:number
+  sub!:Subscription;
+  isOtpVerified:boolean = false ;
+  constructor(private fb:FormBuilder,private http:HttpService) { }
+
   ngOnInit(): void {
-this.initializeForm()
+     this.initializeForm();
   }
   initializeForm(){
-    this.signUpForm = this.fb.group({
-      'userName':[],
-      'password':[],
-      'mobNo':[],
-      'isMobNoVerified':[false]
-
+    this.signForm = this.fb.group({
+      "userName":['',[Validators.required]],
+      "password":['',[Validators.required]],
+      "mobileNumber":['',[Validators.required,Validators.maxLength(10)]],
+      "isMobNoVerified":[false]
     })
   }
-  signUp(){
-   console.log(this.signUpForm.value) 
-  }
-  getOTP(){
-     this.isGetOTP = true
-     this.sub= interval(1000).subscribe((el:number)=>{
-      this.otpCounter = 60-el
-      if(this.otpCounter===0){
-        this.sub.unsubscribe()
 
-      }
-      console.log(el)
+  getOtp(){
+    this.isGetOtp = true ;
+    
+    this.otpGenerated = Math.floor(1000 + Math.random() * 9000);
+    console.log(this.otpGenerated);
+
+    this.sub =  interval(1000).subscribe((el:number)=>{
+        this.otpCounter = 60 - el ;
+       // this.otpCounter--
+        if(this.otpCounter === 0){
+          this.sub.unsubscribe();
+        }
+        console.log(el);
+      })
+  }
+
+  isIncorrectOtp:boolean = false ;
+  verifyOtp(otp:any){
+    if(this.otpGenerated == otp){
+      this.isOtpVerified = true ;
+      this.isGetOtp = false ;
+      this.isIncorrectOtp = false;
+      this.sub.unsubscribe();
+      this.signForm.controls["isMobNoVerified"].setValue(true);
+    }else {
+      this.isIncorrectOtp = true
+    }
+    
+  }
+
+  signUp(){
+    console.log(this.signForm.value);
+     this.http.postDataToServer("users",this.signForm.value).subscribe((el:any)=>{
      })
   }
-  verifyOTP(){
-this.sub.unsubscribe()
-  }
+
   ngOnDestroy(){
-    this.sub.unsubscribe()
+    this.sub.unsubscribe();
   }
 }

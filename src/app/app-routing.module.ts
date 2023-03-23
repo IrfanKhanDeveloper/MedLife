@@ -12,6 +12,7 @@ const routes: Routes = [
   {path:'top-deals-by-category' , component:TopDealsByCategoryComponent},
   {path:'view-product-details/:drugCode' , component:ViewProductDetailsComponent},
   {path:'',pathMatch:'full' , redirectTo:'/home'},
+  { path: 'cart', loadChildren: () => import('./cart/cart.module').then(m => m.CartModule) },
   {path:'**' , component:PageNotFoundComponent}
 ];
 

@@ -1,8 +1,9 @@
 <div class="row">
   <div class="alert alert-danger" role="alert" *ngIf="isNewUser">
-      user does not exist , please register first
+     User doesn't exist ,Please Register First
   </div>
 </div>
+
 <form [formGroup]="signInForm" (ngSubmit)="signIn()">
     <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label">User Name</label>
@@ -20,4 +21,4 @@
     <div class="d-grid gap-2">
       <button class="btn btn-primary" type="submit">Submit</button>
     </div>
-  </form>
+</form>

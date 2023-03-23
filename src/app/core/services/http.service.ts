@@ -21,4 +21,9 @@ httpHeaders : HttpHeaders = new HttpHeaders().set("Content-type","application/js
     const url = this.baseUrl+endPoint
     return this.http.get(url,{headers:this.httpHeaders,params:httpParams})
   }
+
+  postDataToServer(endPoint:string,data:any){
+    const url = this.baseUrl+endPoint
+    return this.http.post(url,data,{headers:this.httpHeaders})
+  }
 }

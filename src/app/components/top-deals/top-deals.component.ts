@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { CartService } from 'src/app/cart/cart.service';
 import { HttpService } from 'src/app/core/services/http.service';
+import { SharedService } from 'src/app/core/services/shared.service';
 
 @Component({
   selector: 'app-top-deals',
@@ -8,22 +10,10 @@ import { HttpService } from 'src/app/core/services/http.service';
   styleUrls: ['./top-deals.component.scss']
 })
 export class TopDealsComponent implements OnInit {
-  topDeals : any[] = []
-  constructor(private http : HttpService){}
+  topDeals:any[] = [] ;
+  constructor(private http:HttpService,private cart :CartService) { }
   ngOnInit(): void {
-   this.getTopDeals()
-  }
-
-  getTopDeals(){
-    this.http.getDataFromServer('top-deals').subscribe((el:any)=>{
-    if(el && el.length > 0){
-      this.topDeals = el
-      console.log('top delas',el)
-    }
-    },
-    error=>{
-      console.log(error)
-    })
+    this.getTopDeals();
   }
 
   customOptions: OwlOptions = {
@@ -45,9 +35,38 @@ export class TopDealsComponent implements OnInit {
         items: 3
       },
       940: {
-        items: 3
+        items: 4
       }
     },
     nav: true
   }
+
+  getTopDeals(){
+    this.http.getDataFromServer("top-deals").subscribe((el:any)=>{
+     if(el && el.length > 0){
+       this.topDeals = el ;
+       console.log("top-deals",this.topDeals);
+     }
+    },
+    error=>{
+     console.log(error);
+    })
+ }
+
+ addToCart(item:any){
+this.cart.addItemToCart(item)
+  
+}
+  getProductsFromLocalStorage(){
+
+    let items = localStorage.getItem("cartItems")
+    if(items){
+      items = JSON.parse(items)
+      return items
+    }else{
+      return []
+    }
+   }
+  
+  
 }
